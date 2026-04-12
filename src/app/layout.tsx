@@ -8,7 +8,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "InfinityGuias",
+  title: "InfinityGO",
   description: "Seus guias e tutoriais da Infinity em um só lugar.",
 };
 
