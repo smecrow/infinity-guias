@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   description: "Seus guias e tutoriais da Infinity em um só lugar.",
   icons: {
     icon: "/icon.svg",
+    apple: "/icon.svg",
   },
 };
 
