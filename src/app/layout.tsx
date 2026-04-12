@@ -11,9 +11,10 @@ export const metadata: Metadata = {
   title: "InfinityGO",
   description: "Seus guias e tutoriais da Infinity em um só lugar.",
   icons: {
-    icon: "/icon.svg?v=3",
-    shortcut: "/favicon.ico?v=3",
-    apple: "/icon.svg?v=3",
+    icon: [
+      { url: "/icon.svg?v=4", type: "image/svg+xml" },
+    ],
+    apple: "/icon.svg?v=4",
   },
 };
 
