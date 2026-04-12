@@ -1,4 +1,4 @@
-Iniciando build em Sat Apr 11 20:59:15 -03 2026
+Iniciando build em Sun Apr 12 08:20:20 -03 2026
 #0 building with "default" instance using docker driver
 
 #1 [internal] load build definition from Dockerfile
@@ -6,7 +6,7 @@ Iniciando build em Sat Apr 11 20:59:15 -03 2026
 #1 DONE 0.0s
 
 #2 [internal] load metadata for docker.io/library/node:20-alpine
-#2 DONE 0.5s
+#2 DONE 1.0s
 
 #3 [internal] load .dockerignore
 #3 transferring context: 2B done
@@ -17,29 +17,29 @@ Iniciando build em Sat Apr 11 20:59:15 -03 2026
 #4 DONE 0.0s
 
 #5 [internal] load build context
-#5 transferring context: 2.13MB 0.7s done
-#5 DONE 0.7s
+#5 transferring context: 2.23MB 1.5s done
+#5 DONE 1.7s
 
-#6 [3/5] COPY package*.json ./
+#6 [2/5] WORKDIR /app
 #6 CACHED
 
-#7 [2/5] WORKDIR /app
+#7 [3/5] COPY package*.json ./
 #7 CACHED
 
 #8 [4/5] RUN npm install
 #8 CACHED
 
 #9 [5/5] COPY . .
-#9 DONE 2.1s
+#9 DONE 7.0s
 
 #10 exporting to image
 #10 exporting layers
-#10 exporting layers 13.7s done
-#10 exporting manifest sha256:d3a431feb8e77712e27d28e4d4854b304e4b664017a2e238ea26cea56695e5b8 done
-#10 exporting config sha256:5ffff527beaf180fb4a970a7d407df4c6a8e8e7ecbb6195d6a02053a838f94e5 done
-#10 exporting attestation manifest sha256:2be461b344a7421995a733a672018d67cbcd279b7bed0b1de0ad037daf536b50 0.0s done
-#10 exporting manifest list sha256:84f2f9517805bdb675556a9f0d82a1fcf2a2011e924a2708cabadf3e3069abb9 0.0s done
+#10 exporting layers 11.6s done
+#10 exporting manifest sha256:8f9900d842bd112669d77d76f997cb2dff1ac06e5c6c1986db07bd164f64e7f7 0.0s done
+#10 exporting config sha256:c9dc48ce36e0ab0c8b3c02c0710502302da4378694f50ba9b5f964481ed4fca6 0.0s done
+#10 exporting attestation manifest sha256:2b9f02c0dcca2869f1c356d1e9ab712f6f4de929c34718cb5774810142fa2202 0.0s done
+#10 exporting manifest list sha256:0324d7f236767ff71bbf8648120995611c5ce0fa82b69d71c8974a88ad3d8332 0.0s done
 #10 naming to docker.io/library/infinity-guias-img:latest done
 #10 unpacking to docker.io/library/infinity-guias-img:latest
-#10 unpacking to docker.io/library/infinity-guias-img:latest 3.4s done
-#10 DONE 17.1s
+#10 unpacking to docker.io/library/infinity-guias-img:latest 3.7s done
+#10 DONE 15.4s

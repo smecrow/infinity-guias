@@ -1,94 +1,93 @@
 "use client";
 
-import { motion } from "framer-motion";
+import React from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { Menu, X, Wifi, Smartphone, Tv, Gauge, Home } from "lucide-react";
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+const Navbar = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const pathname = usePathname();
+
+  const navLinks = [
+    { name: "Início", href: "/", icon: <Home className="w-4 h-4" /> },
+    { name: "MinhaInfinityGo", href: "/tutoriais/minhainfinitygo", icon: <Smartphone className="w-4 h-4" /> },
+    { name: "ITTV Plus", href: "/tutoriais/ittv-plus", icon: <Tv className="w-4 h-4" /> },
+    { name: "Speedtest", href: "/tutoriais/speedtest", icon: <Gauge className="w-4 h-4" /> },
+    { name: "Dicas de Rede", href: "/tutoriais/dicas-de-rede", icon: <Wifi className="w-4 h-4" /> },
+  ];
+
+  const isActive = (path: string) => pathname === path;
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-black/70 backdrop-blur-md border-b border-white/10 shadow-lg transition-all duration-300">
+    <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
-            <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg leading-none">IG</span>
-            </div>
-            <span className="font-bold text-xl text-white">InfinityGuias</span>
-          </Link>
-          
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-6">
-            <Link href="/tutoriais/minhainfinitygo" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
-              MinhaInfinityGO
-            </Link>
-            <Link href="/tutoriais/ittv-plus" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
-              ITTV Plus
-            </Link>
-            <Link href="/tutoriais/speedtest" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
-              Speedtest
-            </Link>
-            <Link href="/tutoriais/dicas-de-rede" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
-              Dicas de Rede
+        <div className="flex justify-between h-16 items-center">
+          <div className="flex-shrink-0 flex items-center">
+            <Link href="/" className="text-2xl font-bold text-primary tracking-tighter">
+              INFINITY<span className="text-foreground">GO</span>
             </Link>
           </div>
 
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`relative px-4 py-2 text-sm font-medium transition-colors hover:text-primary group flex items-center gap-2 ${
+                  isActive(link.href) ? "text-primary" : "text-muted-foreground"
+                }`}
+              >
+                {link.icon}
+                {link.name}
+                
+                {/* Indicador Laranja (Barra inferior) */}
+                <span 
+                  className={`absolute bottom-0 left-0 w-full h-0.5 bg-primary transition-transform duration-300 origin-left ${
+                    isActive(link.href) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  }`}
+                />
+              </Link>
+            ))}
+          </div>
+
           {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center">
+          <div className="md:hidden flex items-center gap-4">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-white focus:outline-none"
-              aria-label="Toggle menu"
+              className="p-2 rounded-md text-muted-foreground hover:text-primary transition-colors"
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? <X /> : <Menu />}
             </button>
           </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      <motion.div
-        initial={false}
-        animate={isOpen ? "open" : "closed"}
-        variants={{
-          open: { height: "auto", opacity: 1, display: "block" },
-          closed: { height: 0, opacity: 0, transitionEnd: { display: "none" } }
-        }}
-        className="lg:hidden overflow-hidden bg-black/90 backdrop-blur-xl border-b border-white/10"
-      >
-        <div className="px-4 pt-2 pb-6 flex flex-col gap-4">
-          <Link
-            href="/tutoriais/minhainfinitygo"
-            onClick={() => setIsOpen(false)}
-            className="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-all"
-          >
-            MinhaInfinityGO
-          </Link>
-          <Link
-            href="/tutoriais/ittv-plus"
-            onClick={() => setIsOpen(false)}
-            className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-white hover:bg-white/5 transition-all"
-          >
-            ITTV Plus
-          </Link>
-          <Link
-            href="/tutoriais/speedtest"
-            onClick={() => setIsOpen(false)}
-            className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-white hover:bg-white/5 transition-all"
-          >
-            Speedtest
-          </Link>
-          <Link
-            href="/tutoriais/dicas-de-rede"
-            onClick={() => setIsOpen(false)}
-            className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-white hover:bg-white/5 transition-all"
-          >
-            Dicas de Rede
-          </Link>
+      {isOpen && (
+        <div className="md:hidden bg-background border-b border-border animate-in slide-in-from-top duration-300">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`flex items-center gap-3 px-3 py-3 rounded-md text-base font-medium transition-all ${
+                  isActive(link.href) 
+                    ? "bg-primary/10 text-primary border-l-4 border-primary pl-2" 
+                    : "text-muted-foreground hover:bg-muted hover:text-primary"
+                }`}
+              >
+                {link.icon}
+                {link.name}
+              </Link>
+            ))}
+          </div>
         </div>
-      </motion.div>
+      )}
     </nav>
   );
-}
+};
+
+export default Navbar;
