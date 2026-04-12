@@ -1,0 +1,45 @@
+Iniciando build em Sat Apr 11 20:59:15 -03 2026
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 330B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:20-alpine
+#2 DONE 0.5s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM docker.io/library/node:20-alpine@sha256:f598378b5240225e6beab68fa9f356db1fb8efe55173e6d4d8153113bb8f333c
+#4 resolve docker.io/library/node:20-alpine@sha256:f598378b5240225e6beab68fa9f356db1fb8efe55173e6d4d8153113bb8f333c 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 2.13MB 0.7s done
+#5 DONE 0.7s
+
+#6 [3/5] COPY package*.json ./
+#6 CACHED
+
+#7 [2/5] WORKDIR /app
+#7 CACHED
+
+#8 [4/5] RUN npm install
+#8 CACHED
+
+#9 [5/5] COPY . .
+#9 DONE 2.1s
+
+#10 exporting to image
+#10 exporting layers
+#10 exporting layers 13.7s done
+#10 exporting manifest sha256:d3a431feb8e77712e27d28e4d4854b304e4b664017a2e238ea26cea56695e5b8 done
+#10 exporting config sha256:5ffff527beaf180fb4a970a7d407df4c6a8e8e7ecbb6195d6a02053a838f94e5 done
+#10 exporting attestation manifest sha256:2be461b344a7421995a733a672018d67cbcd279b7bed0b1de0ad037daf536b50 0.0s done
+#10 exporting manifest list sha256:84f2f9517805bdb675556a9f0d82a1fcf2a2011e924a2708cabadf3e3069abb9 0.0s done
+#10 naming to docker.io/library/infinity-guias-img:latest done
+#10 unpacking to docker.io/library/infinity-guias-img:latest
+#10 unpacking to docker.io/library/infinity-guias-img:latest 3.4s done
+#10 DONE 17.1s
