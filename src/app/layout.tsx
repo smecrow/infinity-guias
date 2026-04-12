@@ -10,6 +10,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "InfinityGO",
   description: "Seus guias e tutoriais da Infinity em um só lugar.",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
