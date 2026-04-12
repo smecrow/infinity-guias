@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ArrowLeft, CreditCard, Lock, Star, ChevronRight, Smartphone, Apple } from 'lucide-react';
 
@@ -12,14 +12,14 @@ interface StepProps {
 }
 
 const TutorialStep = ({ number, text, imageSrc, isLast }: StepProps) => (
-  <div className={`mb-12 ${!isLast ? 'border-l-2 border-primary/20 ml-4 pl-8 pb-4' : 'ml-4 pl-8'}`}>
+  <div className={`mb-12 relative ${!isLast ? 'border-l-2 border-primary/20 ml-6 md:ml-4 pl-6 md:pl-8 pb-4' : 'ml-6 md:ml-4 pl-6 md:pl-8'}`}>
     <div className="relative">
-      <div className="absolute -left-[45px] top-0 bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg">
+      <div className="absolute -left-[39px] md:-left-[45px] top-0 bg-primary text-primary-foreground w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center font-bold shadow-lg text-sm md:text-base">
         {number}
       </div>
-      <p className="text-lg font-medium mb-6 text-foreground/90">{text}</p>
+      <p className="text-base md:text-lg font-medium mb-6 text-foreground/90 leading-relaxed">{text}</p>
       {imageSrc && (
-        <div className="rounded-2xl overflow-hidden border border-border bg-muted/30 shadow-sm max-w-[320px]">
+        <div className="rounded-2xl overflow-hidden border border-border bg-muted/30 shadow-sm max-w-full sm:max-w-[320px]">
           <Image 
             src={imageSrc} 
             alt={`Passo ${number}`} 
@@ -37,6 +37,15 @@ const TutorialStep = ({ number, text, imageSrc, isLast }: StepProps) => (
 export default function MinhaInfinityGoTutorial() {
   const [activeTutorial, setActiveTutorial] = useState<'main' | 'desbloqueio' | 'faturas' | 'beneficios'>('main');
   const [os, setOs] = useState<'android' | 'ios'>('android');
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    if (/iphone|ipad|ipod/.test(userAgent)) {
+      setOs('ios');
+    } else {
+      setOs('android');
+    }
+  }, []);
 
   const mainStepsAndroid = [
     { text: "Abra a loja de aplicativos de seu celular (Playstore).", img: "/tutoriais/minhainfinitygo/android/Screenshot_1.webp" },
@@ -71,18 +80,18 @@ export default function MinhaInfinityGoTutorial() {
         </h1>
         <p className="text-xl text-muted-foreground mb-8">Escolha seu sistema para ver o passo a passo.</p>
         
-        <div className="flex justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-12">
           <button 
             onClick={() => setOs('android')}
-            className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all ${os === 'android' ? 'bg-primary text-primary-foreground shadow-lg scale-105' : 'bg-muted text-muted-foreground hover:bg-muted/80'}`}
+            className={`flex items-center justify-center gap-2 px-6 py-2.5 md:py-3 rounded-full font-semibold transition-all flex-1 sm:flex-none min-w-[120px] ${os === 'android' ? 'bg-primary text-primary-foreground shadow-lg scale-105' : 'bg-muted text-muted-foreground hover:bg-muted/80'}`}
           >
-            <Smartphone size={20} /> Android
+            <Smartphone size={18} className="md:w-5 md:h-5" /> Android
           </button>
           <button 
             onClick={() => setOs('ios')}
-            className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all ${os === 'ios' ? 'bg-primary text-primary-foreground shadow-lg scale-105' : 'bg-muted text-muted-foreground hover:bg-muted/80'}`}
+            className={`flex items-center justify-center gap-2 px-6 py-2.5 md:py-3 rounded-full font-semibold transition-all flex-1 sm:flex-none min-w-[120px] ${os === 'ios' ? 'bg-primary text-primary-foreground shadow-lg scale-105' : 'bg-muted text-muted-foreground hover:bg-muted/80'}`}
           >
-            <Apple size={20} /> iOS (iPhone)
+            <Apple size={18} className="md:w-5 md:h-5" /> iOS
           </button>
         </div>
       </header>

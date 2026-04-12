@@ -1,4 +1,4 @@
-Iniciando build em Sun Apr 12 08:20:20 -03 2026
+Iniciando build em Sun Apr 12 11:02:15 -03 2026
 #0 building with "default" instance using docker driver
 
 #1 [internal] load build definition from Dockerfile
@@ -17,29 +17,29 @@ Iniciando build em Sun Apr 12 08:20:20 -03 2026
 #4 DONE 0.0s
 
 #5 [internal] load build context
-#5 transferring context: 2.23MB 1.5s done
-#5 DONE 1.7s
+#5 transferring context: 9.86MB 1.3s done
+#5 DONE 1.4s
 
-#6 [2/5] WORKDIR /app
+#6 [3/5] COPY package*.json ./
 #6 CACHED
 
-#7 [3/5] COPY package*.json ./
+#7 [2/5] WORKDIR /app
 #7 CACHED
 
 #8 [4/5] RUN npm install
 #8 CACHED
 
 #9 [5/5] COPY . .
-#9 DONE 7.0s
+#9 DONE 9.0s
 
 #10 exporting to image
 #10 exporting layers
 #10 exporting layers 11.6s done
-#10 exporting manifest sha256:8f9900d842bd112669d77d76f997cb2dff1ac06e5c6c1986db07bd164f64e7f7 0.0s done
-#10 exporting config sha256:c9dc48ce36e0ab0c8b3c02c0710502302da4378694f50ba9b5f964481ed4fca6 0.0s done
-#10 exporting attestation manifest sha256:2b9f02c0dcca2869f1c356d1e9ab712f6f4de929c34718cb5774810142fa2202 0.0s done
-#10 exporting manifest list sha256:0324d7f236767ff71bbf8648120995611c5ce0fa82b69d71c8974a88ad3d8332 0.0s done
+#10 exporting manifest sha256:a7bf5277669f692a2f4431c0bef3f9ae855d0607374b5789c0892ea7622d62cc done
+#10 exporting config sha256:542b8256a9129fc05822c480f43e23d25e3b024a6954e02336b335d807ba0e3a done
+#10 exporting attestation manifest sha256:6a923c670a96c28ffcd5a88f19dc103240285c945a85f08a6cbd18c645d2236b 0.0s done
+#10 exporting manifest list sha256:b5ae49c4104f5ff982d1eef3f10b714dadee1dfc1f0cf0b178a2898b708495f8 done
 #10 naming to docker.io/library/infinity-guias-img:latest done
 #10 unpacking to docker.io/library/infinity-guias-img:latest
-#10 unpacking to docker.io/library/infinity-guias-img:latest 3.7s done
-#10 DONE 15.4s
+#10 unpacking to docker.io/library/infinity-guias-img:latest 3.6s done
+#10 DONE 15.3s
