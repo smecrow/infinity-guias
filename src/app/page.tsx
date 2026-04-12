@@ -14,14 +14,16 @@ export default function Home() {
       const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
       const isMobileWidth = window.innerWidth < 1024; // Tablets e celulares
 
-      if (isMobileUA || isMobileWidth) {
-        setSelectedDevice("mobile");
-      } else {
-        setSelectedDevice("desktop");
-      }
-      
-      // Pequeno delay para garantir uma transição suave de entrada
-      setTimeout(() => setIsDetecting(false), 500);
+      setTimeout(() => {
+        if (isMobileUA || isMobileWidth) {
+          setSelectedDevice("mobile");
+        } else {
+          setSelectedDevice("desktop");
+        }
+        
+        // Pequeno delay para garantir uma transição suave de entrada
+        setIsDetecting(false);
+      }, 500);
     };
 
     detectDevice();
@@ -54,8 +56,6 @@ export default function Home() {
           selectedDevice && (
             <LandingContent 
               key="content" 
-              selectedDevice={selectedDevice} 
-              onReset={() => {}} // Função de reset desativada pois a detecção é automática
             />
           )
         )}

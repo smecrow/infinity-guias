@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, Monitor, Smartphone, Apple, ChevronRight } from 'lucide-react';
+import { Monitor, Smartphone, Apple } from 'lucide-react';
 
 interface StepProps {
   number: number;
@@ -40,39 +40,34 @@ export default function IttvPlusTutorial() {
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
-    if (/iphone|ipad|ipod/.test(userAgent)) {
-      setDevice('ios');
-    } else if (/android/.test(userAgent)) {
-      setDevice('android');
-    } else {
-      setDevice('pc');
-    }
+    setTimeout(() => {
+      if (/iphone|ipad|ipod/.test(userAgent)) {
+        setDevice('ios');
+      } else if (/android/.test(userAgent)) {
+        setDevice('android');
+      } else {
+        setDevice('pc');
+      }
+    }, 0);
   }, []);
 
   const renderPcTutorial = () => (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <header className="mb-12 text-center">
-        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-          Como usar o ITTV Plus no PC
-        </h1>
-        <p className="text-xl text-muted-foreground">Assista seus canais favoritos diretamente no navegador.</p>
-      </header>
-
       <div className="max-w-4xl mx-auto mb-16 flex flex-col items-center">
         <div className="w-full max-w-2xl text-left">
           <TutorialStep 
             number={1}
             text={
               <span>
-                Para utilizar o ITTV Plus, acesse le link{" "}
+                Para utilizar o ITTV Plus, acesse o link{" "}
                 <a href="https://tv.ittv.com.br" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-bold">
                   https://tv.ittv.com.br
                 </a>
                 {" "}, depois entre com o e-mail e a senha cadastrados no aplicativo{" "}
                 <Link href="/tutoriais/minhainfinitygo" className="text-primary hover:underline font-bold">
-                  MinhaInfinityGO
+                  Minha Infinity Go
                 </Link>
-                {" "}e, em seguida, clique no botão "Entrar".
+                {" "}e, em seguida, clique no botão &quot;Entrar&quot;.
               </span>
             }
             imageSrc="/tutoriais/ittv-plus/pc/2.webp"
@@ -90,13 +85,6 @@ export default function IttvPlusTutorial() {
 
   const renderAndroidTutorial = () => (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <header className="mb-12 text-center">
-        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-          Como usar o ITTV Plus no Android
-        </h1>
-        <p className="text-xl text-muted-foreground">Assista em seu smartphone ou tablet Android.</p>
-      </header>
-
       <div className="max-w-2xl mx-auto mb-16">
         <TutorialStep 
           number={1}
@@ -129,9 +117,8 @@ export default function IttvPlusTutorial() {
             <span>
               Faça login usando o mesmo e-mail e senha do aplicativo{" "}
               <Link href="/tutoriais/minhainfinitygo" className="text-primary hover:underline font-bold">
-                MinhaInfinityGO
-              </Link>
-              .
+                Minha Infinity Go
+                </Link>              .
             </span>
           }
           imageSrc="/tutoriais/ittv-plus/android/6.webp"
@@ -148,13 +135,6 @@ export default function IttvPlusTutorial() {
 
   const renderIosTutorial = () => (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <header className="mb-12 text-center">
-        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-          Como usar o ITTV Plus no iOS
-        </h1>
-        <p className="text-xl text-muted-foreground">Assista em seu iPhone ou iPad.</p>
-      </header>
-
       <div className="max-w-2xl mx-auto mb-16">
         <TutorialStep 
           number={1}
@@ -187,9 +167,8 @@ export default function IttvPlusTutorial() {
             <span>
               Faça login usando o mesmo e-mail e senha do aplicativo{" "}
               <Link href="/tutoriais/minhainfinitygo" className="text-primary hover:underline font-bold">
-                MinhaInfinityGO
-              </Link>
-              .
+                Minha Infinity Go
+                </Link>              .
             </span>
           }
           imageSrc="/tutoriais/ittv-plus/ios/6.webp"
@@ -207,6 +186,16 @@ export default function IttvPlusTutorial() {
   return (
     <main className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto px-2 sm:px-4">
+        <header className="mb-12 text-center">
+          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+            Como usar o ITTV Plus
+          </h1>
+          <p className="text-lg text-foreground/80 max-w-2xl mx-auto mb-6 leading-relaxed font-medium">
+            Assista seus canais favoritos diretamente no navegador, smartphone ou tablet.
+          </p>
+          <p className="text-xl text-muted-foreground mb-8">Escolha seu sistema para ver o passo a passo.</p>
+        </header>
+
         {/* Seletor de Dispositivo */}
         <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-12 md:mb-16">
           <button 

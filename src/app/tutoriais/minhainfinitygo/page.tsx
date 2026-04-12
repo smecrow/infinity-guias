@@ -26,7 +26,7 @@ const TutorialStep = ({ number, text, imageSrc, isLast }: StepProps) => (
             width={320} 
             height={640} 
             className="w-full h-auto object-cover"
-            priority={number <= 2}
+            key={imageSrc} // Força o recarregamento da imagem quando o src muda
           />
         </div>
       )}
@@ -40,18 +40,20 @@ export default function MinhaInfinityGoTutorial() {
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
-    if (/iphone|ipad|ipod/.test(userAgent)) {
-      setOs('ios');
-    } else {
-      setOs('android');
-    }
+    setTimeout(() => {
+      if (/iphone|ipad|ipod/.test(userAgent)) {
+        setOs('ios');
+      } else {
+        setOs('android');
+      }
+    }, 0);
   }, []);
 
   const mainStepsAndroid = [
     { text: "Abra a loja de aplicativos de seu celular (Playstore).", img: "/tutoriais/minhainfinitygo/android/Screenshot_1.webp" },
     { text: 'Aperte no botão "Pesquisar" no canto inferior direito.', img: "/tutoriais/minhainfinitygo/android/Screenshot_2.webp" },
     { text: 'Aperte em "Pesquisar apps e jogos".', img: "/tutoriais/minhainfinitygo/android/Screenshot_3.webp" },
-    { text: 'Pesquise "MinhaInfinityGo" na aba de pesquisa.', img: "/tutoriais/minhainfinitygo/android/Screenshot_4.webp" },
+    { text: 'Pesquise "Minha Infinity Go" na aba de pesquisa.', img: "/tutoriais/minhainfinitygo/android/Screenshot_4.webp" },
     { text: 'Aperte no botão "Instalar".', img: "/tutoriais/minhainfinitygo/android/Screenshot_5.webp" },
     { text: 'Após instalado, abra o aplicativo com o botão "Abrir".', img: "/tutoriais/minhainfinitygo/android/Screenshot_6.webp" },
     { text: 'Se você não tiver uma conta no aplicativo, aperte no botão "Primeiro acesso?", no canto inferior. Caso já tiver uma conta, pule para o passo 9.', img: "/tutoriais/minhainfinitygo/android/Screenshot_7.webp" },
@@ -63,7 +65,7 @@ export default function MinhaInfinityGoTutorial() {
   const mainStepsIos = [
     { text: "Abra a loja de aplicativos de seu celular (AppStore).", img: "/tutoriais/minhainfinitygo/ios/1.webp" },
     { text: 'Aperte no botão "Buscar" no canto inferior direito.', img: "/tutoriais/minhainfinitygo/ios/2.webp" },
-    { text: 'Pesquise "MinhaInfinityGo" na aba de pesquisa.', img: "/tutoriais/minhainfinitygo/ios/3.webp" },
+    { text: 'Pesquise "Minha Infinity Go" na aba de pesquisa.', img: "/tutoriais/minhainfinitygo/ios/3.webp" },
     { text: 'Aperte no botão "Obter" ou em uma nuvem que aparecerá na foto a seguir.', img: "/tutoriais/minhainfinitygo/ios/4.webp" },
     { text: 'Após instalado, abra o aplicativo com o botão "Abrir".', img: "/tutoriais/minhainfinitygo/ios/5.webp" },
     { text: 'Se você não tiver uma conta no aplicativo, aperte no botão "Primeiro acesso?", no canto inferior. Caso já tiver uma conta, pule para o passo 8.', img: "/tutoriais/minhainfinitygo/ios/6.webp" },
@@ -73,11 +75,14 @@ export default function MinhaInfinityGoTutorial() {
   ];
 
   const renderMainTutorial = () => (
-    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 px-2 sm:px-0">
       <header className="mb-12 text-center">
         <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-          Como usar o MinhaInfinityGo
+          Como usar o Minha Infinity Go
         </h1>
+        <p className="text-lg text-foreground/80 max-w-2xl mx-auto mb-6 leading-relaxed font-medium">
+          Faça o desbloqueio de confiança de sua conexão, pague faturas, veja seus beneficios e muito mais no app Minha Infinity Go!
+        </p>
         <p className="text-xl text-muted-foreground mb-8">Escolha seu sistema para ver o passo a passo.</p>
         
         <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-12">
@@ -99,7 +104,7 @@ export default function MinhaInfinityGoTutorial() {
       <div className="max-w-2xl mx-auto mb-16">
         {(os === 'android' ? mainStepsAndroid : mainStepsIos).map((step, index, array) => (
           <TutorialStep 
-            key={index}
+            key={`${os}-main-${index}`} // Key única incluindo o OS para forçar re-render
             number={index + 1}
             text={step.text}
             imageSrc={step.img}
@@ -108,7 +113,7 @@ export default function MinhaInfinityGoTutorial() {
         ))}
       </div>
 
-      <section className="bg-muted/50 rounded-3xl p-8 border border-border shadow-inner">
+      <section className="bg-muted/50 rounded-3xl p-6 md:p-8 border border-border shadow-inner mx-[-8px] sm:mx-0">
         <h2 className="text-2xl font-bold mb-6 text-center">Precisa de ajuda com algo mais?</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <button 
@@ -158,7 +163,7 @@ export default function MinhaInfinityGoTutorial() {
   );
 
   const renderDesbloqueio = () => (
-    <div className="animate-in fade-in slide-in-from-right-4 duration-500 max-w-2xl mx-auto py-12">
+    <div className="animate-in fade-in slide-in-from-right-4 duration-500 max-w-2xl mx-auto py-12 px-4 sm:px-0">
       <button 
         onClick={() => setActiveTutorial('main')}
         className="flex items-center text-muted-foreground hover:text-primary transition-colors mb-8 group"
@@ -167,22 +172,24 @@ export default function MinhaInfinityGoTutorial() {
       </button>
 
       <header className="mb-12">
-        <h2 className="text-4xl font-bold mb-4">Como fazer um desbloqueio de confiança?</h2>
-        <div className="h-1 w-20 bg-primary rounded-full mb-8" />
+        <h2 className="text-4xl font-bold mb-4 px-2">Como fazer um desbloqueio de confiança?</h2>
+        <div className="h-1 w-20 bg-primary rounded-full mb-8 ml-2" />
       </header>
 
       <div className="space-y-4">
         <TutorialStep 
+          key={`${os}-desbloqueio-1`}
           number={1} 
-          text={os === 'android' ? "Na tela inicial de seu aplicativo MinhaInfinityGo, aperte na opção de seu plano." : "Na tela inicial de seu aplicativo MinhaInfinityGo, aperte na descrição de seu plano."} 
+          text={os === 'android' ? "Na tela inicial de seu aplicativo Minha Infinity Go, aperte na opção de seu plano." : "Na tela inicial de seu aplicativo Minha Infinity Go, aperte na descrição de seu plano."} 
           imageSrc={os === 'android' ? "/tutoriais/minhainfinitygo/android/Screenshot_14.webp" : "/tutoriais/minhainfinitygo/ios/9.webp"}
         />
         <TutorialStep 
+          key={`${os}-desbloqueio-2`}
           number={2} 
           text='Será exibido o seu plano atual, o local onde a instalação foi realizada e logo abaixo, terá a opção de "Desbloquear Internet".' 
           imageSrc={os === 'android' ? "/tutoriais/minhainfinitygo/android/Screenshot_15.webp" : "/tutoriais/minhainfinitygo/ios/12.webp"}
         />
-        <div className="bg-amber-50 dark:bg-amber-950/30 border-l-4 border-amber-500 p-6 rounded-r-2xl mb-12 ml-4">
+        <div className="bg-amber-50 dark:bg-amber-950/30 border-l-4 border-amber-500 p-6 rounded-r-2xl mb-12 ml-6 md:ml-4">
           <div className="flex items-start">
             <div className="flex-shrink-0">
               <span className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-500 text-white font-bold text-sm">3</span>
@@ -200,7 +207,7 @@ export default function MinhaInfinityGoTutorial() {
   );
 
   const renderFaturas = () => (
-    <div className="animate-in fade-in slide-in-from-right-4 duration-500 max-w-2xl mx-auto py-12">
+    <div className="animate-in fade-in slide-in-from-right-4 duration-500 max-w-2xl mx-auto py-12 px-4 sm:px-0">
       <button 
         onClick={() => setActiveTutorial('main')}
         className="flex items-center text-muted-foreground hover:text-primary transition-colors mb-8 group"
@@ -209,12 +216,13 @@ export default function MinhaInfinityGoTutorial() {
       </button>
 
       <header className="mb-12">
-        <h2 className="text-4xl font-bold mb-4">Como pagar as minhas faturas?</h2>
-        <div className="h-1 w-20 bg-primary rounded-full mb-8" />
+        <h2 className="text-4xl font-bold mb-4 px-2">Como pagar as minhas faturas?</h2>
+        <div className="h-1 w-20 bg-primary rounded-full mb-8 ml-2" />
       </header>
 
       <div className="space-y-4">
         <TutorialStep 
+          key={`${os}-faturas-1`}
           number={1} 
           text='Para realizar o pagamento de suas faturas em aberto, você apertará na opção "Faturas", que se lozaliza no canto inferior do aplicativo, suas faturas pendentes serão exibidas logo abaixo de seu contrato.' 
           imageSrc={os === 'android' ? "/tutoriais/minhainfinitygo/android/Screenshot_12.webp" : "/tutoriais/minhainfinitygo/ios/10.webp"}
@@ -224,7 +232,7 @@ export default function MinhaInfinityGoTutorial() {
   );
 
   const renderBeneficios = () => (
-    <div className="animate-in fade-in slide-in-from-right-4 duration-500 max-w-2xl mx-auto py-12">
+    <div className="animate-in fade-in slide-in-from-right-4 duration-500 max-w-2xl mx-auto py-12 px-4 sm:px-0">
       <button 
         onClick={() => setActiveTutorial('main')}
         className="flex items-center text-muted-foreground hover:text-primary transition-colors mb-8 group"
@@ -233,12 +241,13 @@ export default function MinhaInfinityGoTutorial() {
       </button>
 
       <header className="mb-12">
-        <h2 className="text-4xl font-bold mb-4">Como posso ver os benefícios inclusos em meu plano?</h2>
-        <div className="h-1 w-20 bg-primary rounded-full mb-8" />
+        <h2 className="text-4xl font-bold mb-4 px-2">Como posso ver os benefícios inclusos em meu plano?</h2>
+        <div className="h-1 w-20 bg-primary rounded-full mb-8 ml-2" />
       </header>
 
       <div className="space-y-4">
         <TutorialStep 
+          key={`${os}-beneficios-1`}
           number={1} 
           text='Para verificar quais benefícios estão inclusos em seu plano, aperte na opção "Pra você", localizada na parte inferior de seu aplicativo. Irá exibir todos os benefícios inclusos em seu plano e guias de como utiliza-los.' 
           imageSrc={os === 'android' ? "/tutoriais/minhainfinitygo/android/Screenshot_13.webp" : "/tutoriais/minhainfinitygo/ios/11.webp"}
@@ -248,7 +257,7 @@ export default function MinhaInfinityGoTutorial() {
   );
 
   return (
-    <main className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
       <div className="max-w-5xl mx-auto">
         {activeTutorial === 'main' && renderMainTutorial()}
         {activeTutorial === 'desbloqueio' && renderDesbloqueio()}

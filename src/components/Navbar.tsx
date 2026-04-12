@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Wifi, Smartphone, Tv, Gauge, Home } from "lucide-react";
+import { Menu, X, Smartphone, Tv, Gauge, Home, Phone } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -11,10 +11,10 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Início", href: "/", icon: <Home className="w-4 h-4" /> },
-    { name: "MinhaInfinityGo", href: "/tutoriais/minhainfinitygo", icon: <Smartphone className="w-4 h-4" /> },
+    { name: "Minha Infinity Go", href: "/tutoriais/minhainfinitygo", icon: <Smartphone className="w-4 h-4" /> },
     { name: "ITTV Plus", href: "/tutoriais/ittv-plus", icon: <Tv className="w-4 h-4" /> },
-    { name: "Speedtest", href: "/tutoriais/speedtest", icon: <Gauge className="w-4 h-4" /> },
-    { name: "Dicas de Rede", href: "/tutoriais/dicas-de-rede", icon: <Wifi className="w-4 h-4" /> },
+    { name: "Teste de velocidade", href: "/tutoriais/speedtest", icon: <Gauge className="w-4 h-4" /> },
+    { name: "Contato", href: "/contato", icon: <Phone className="w-4 h-4" /> },
   ];
 
   const isActive = (path: string) => pathname === path;
