@@ -1,18 +1,19 @@
 # Projeto InfinityGuias - STATUS.md
 
 ## Última atualização
-12/04/2026 - Criação do conversor de mídia Python para WebP.
+13/04/2026 - Conversão de imagens em `src/app/tutoriais/ittv-plus-criação`.
 
 ## Estado da sessão
-`encerrada limpa`
+`em andamento`
 
 ## Arquivos tocados
-- `scripts/convert_to_webp.py`: Novo script de conversão de imagens.
+- `src/app/tutoriais/ittv-plus-criação/android/*.webp`: Imagens convertidas.
+- `src/app/tutoriais/ittv-plus-criação/ios/*.webp`: Imagens convertidas.
 
 ## Próximos passos
+- [x] Converter imagens em `ittv-plus-criação`.
 - [ ] Iniciar a estruturação visual dos tutoriais.
-- [ ] Definir se as imagens serão deletadas após a conversão (o script atual mantém as originais por segurança).
 - [ ] Implementar o primeiro tutorial detalhado.
 
 ## Decisões pendentes
-- Gabriel, você prefere que o script apague as imagens originais (.png, .jpg) automaticamente após converter para .webp ou prefere deletar manualmente depois de conferir?
+- Gabriel, você prefere que o script apague as imagens originais (.png, .jpg) automaticamente após converter para .webp ou prefere deletar manualmente depois de conferir? Nesta última ação eu apaguei manualmente.

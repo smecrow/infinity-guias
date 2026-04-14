@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
+import { motion } from 'framer-motion';
 import { ArrowLeft, CreditCard, Lock, Star, ChevronRight, Smartphone, Apple } from 'lucide-react';
 
 interface StepProps {
@@ -12,31 +14,57 @@ interface StepProps {
 }
 
 const TutorialStep = ({ number, text, imageSrc, isLast }: StepProps) => (
-  <div className={`mb-12 relative ${!isLast ? 'border-l-2 border-primary/20 ml-6 md:ml-4 pl-6 md:pl-8 pb-4' : 'ml-6 md:ml-4 pl-6 md:pl-8'}`}>
+  <motion.div 
+    initial={{ opacity: 0, x: -20 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true, margin: "-100px" }}
+    transition={{ duration: 0.5, delay: number * 0.05 }}
+    className={`mb-12 relative ${!isLast ? 'border-l-2 border-primary/20 ml-6 md:ml-4 pl-6 md:pl-8 pb-4' : 'ml-6 md:ml-4 pl-6 md:pl-8'}`}
+  >
     <div className="relative">
-      <div className="absolute -left-[39px] md:-left-[45px] top-0 bg-primary text-primary-foreground w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center font-bold shadow-lg text-sm md:text-base">
+      <motion.div 
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20, delay: (number * 0.05) + 0.1 }}
+        className="absolute -left-[39px] md:-left-[45px] top-0 bg-primary text-primary-foreground w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center font-bold shadow-lg text-sm md:text-base z-10"
+      >
         {number}
-      </div>
+      </motion.div>
       <p className="text-base md:text-lg font-medium mb-6 text-foreground/90 leading-relaxed">{text}</p>
       {imageSrc && (
-        <div className="rounded-2xl overflow-hidden border border-border bg-muted/30 shadow-sm max-w-full sm:max-w-[320px]">
+        <motion.div 
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.6, delay: (number * 0.05) + 0.2 }}
+          className="rounded-2xl overflow-hidden border border-border bg-muted/30 shadow-sm max-w-full sm:max-w-[320px]"
+        >
           <Image 
             src={imageSrc} 
             alt={`Passo ${number}`} 
             width={320} 
             height={640} 
-            className="w-full h-auto object-cover"
+            className="w-full h-auto object-cover transition-transform duration-500 hover:scale-105"
             key={imageSrc} // Força o recarregamento da imagem quando o src muda
           />
-        </div>
+        </motion.div>
       )}
     </div>
-  </div>
+  </motion.div>
 );
 
-export default function MinhaInfinityGoTutorial() {
+function MinhaInfinityGoContent() {
+  const searchParams = useSearchParams();
   const [activeTutorial, setActiveTutorial] = useState<'main' | 'desbloqueio' | 'faturas' | 'beneficios'>('main');
   const [os, setOs] = useState<'android' | 'ios'>('android');
+
+  useEffect(() => {
+    const tab = searchParams.get('tab');
+    if (tab && ['main', 'desbloqueio', 'faturas', 'beneficios'].includes(tab)) {
+      setTimeout(() => {
+        setActiveTutorial(tab as 'main' | 'desbloqueio' | 'faturas' | 'beneficios');
+      }, 0);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -181,7 +209,7 @@ export default function MinhaInfinityGoTutorial() {
           key={`${os}-desbloqueio-1`}
           number={1} 
           text={os === 'android' ? "Na tela inicial de seu aplicativo Minha Infinity Go, aperte na opção de seu plano." : "Na tela inicial de seu aplicativo Minha Infinity Go, aperte na descrição de seu plano."} 
-          imageSrc={os === 'android' ? "/tutoriais/minhainfinitygo/android/Screenshot_14.webp" : "/tutoriais/minhainfinitygo/ios/9.webp"}
+          imageSrc={os === 'android' ? "/tutoriais/minhainfinitygo/android/Screenshot_14.webp" : "/tutoriais/minhainfinitygo/ios/12.webp"}
         />
         <TutorialStep 
           key={`${os}-desbloqueio-2`}
@@ -265,5 +293,13 @@ export default function MinhaInfinityGoTutorial() {
         {activeTutorial === 'beneficios' && renderBeneficios()}
       </div>
     </main>
+  );
+}
+
+export default function MinhaInfinityGoTutorial() {
+  return (
+    <Suspense fallback={<div className="min-h-screen pt-24 flex items-center justify-center text-muted-foreground">Carregando tutorial...</div>}>
+      <MinhaInfinityGoContent />
+    </Suspense>
   );
 }
