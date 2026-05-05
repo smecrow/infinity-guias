@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants, TargetAndTransition } from "framer-motion";
-import { ArrowRight, Smartphone, Gauge, Tv } from "lucide-react";
+import { ArrowRight, Smartphone, Gauge, Tv, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 export default function LandingContent() {
@@ -92,7 +92,7 @@ export default function LandingContent() {
           </p>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Tutorial Card 1 */}
           <motion.div whileHover={cardHover} className="h-full">
             <Link href="/tutoriais/minhainfinitygo" className="group block h-full">
@@ -141,6 +141,25 @@ export default function LandingContent() {
                 <h2 className="text-2xl font-bold text-[var(--card-foreground)] mb-4">Teste de velocidade</h2>
                 <p className="text-base text-[var(--card-foreground)] opacity-70 flex-grow mb-6 leading-relaxed">
                   Aprenda como fazer o teste de velocidade corretamente no seu aparelho.
+                </p>
+                <div className="flex items-center text-orange-600 dark:text-orange-400 font-bold gap-2 group-hover:gap-4 transition-all group-hover:underline decoration-2 underline-offset-4">
+                  <span>Ver tutorial</span>
+                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </Link>
+          </motion.div>
+
+          {/* Tutorial Card 4 */}
+          <motion.div whileHover={cardHover} className="h-full">
+            <Link href="/tutoriais/imagina-so" className="group block h-full">
+              <div className="bg-[var(--card)] rounded-[2rem] p-8 border border-[var(--border)] shadow-sm hover:shadow-2xl hover:border-orange-500/50 transition-all duration-500 h-full flex flex-col items-center text-center backdrop-blur-sm bg-opacity-80">
+                <div className="w-16 h-16 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-6 transition-transform">
+                  <Sparkles size={32} />
+                </div>
+                <h2 className="text-2xl font-bold text-[var(--card-foreground)] mb-4">Imagina Só</h2>
+                <p className="text-base text-[var(--card-foreground)] opacity-70 flex-grow mb-6 leading-relaxed">
+                  Imagina Só é um aplicativo que oferecemos aos nossos clientes, com histórias infantis. Aprenda a utilizá-lo!
                 </p>
                 <div className="flex items-center text-orange-600 dark:text-orange-400 font-bold gap-2 group-hover:gap-4 transition-all group-hover:underline decoration-2 underline-offset-4">
                   <span>Ver tutorial</span>

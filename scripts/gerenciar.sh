@@ -16,7 +16,7 @@ show_menu() {
     echo -e "${BLUE}    INFINITY GUIAS - GERENCIADOR DOCKER   ${NC}"
     echo -e "${BLUE}==========================================${NC}"
     echo ""
-    echo "1) Iniciar Projeto (Build + Container)"
+    echo "1) Iniciar Projeto com Hot Reload (Build + Container)"
     echo "2) Parar e Remover Container"
     echo "3) Ver Logs em Tempo Real"
     echo "4) Sair"
@@ -58,20 +58,24 @@ iniciar_projeto() {
         return 1
     fi
 
-    echo -e "\n${BLUE}3. Iniciando container na porta 3000 com Hot-Reload...${NC}"
-    # Executa o run e redireciona saída e erro para o log absoluto
+    echo -e "\n${BLUE}3. Iniciando container na porta 3000 com Hot Reload...${NC}"
+    # Monta o código local em /app para o Next.js atualizar a página sem reiniciar o container.
     echo "Iniciando container em $(date)" > "$RUN_LOG"
     docker run -d \
       --name $CONTAINER_NAME \
       -p 3000:3000 \
       -e WATCHPACK_POLLING=true \
+      -e CHOKIDAR_USEPOLLING=true \
+      -e CHOKIDAR_INTERVAL=1000 \
+      -e NEXT_WEBPACK_USEPOLLING=1 \
       -v "$(pwd):/app" \
       -v /app/node_modules \
+      -v /app/.next \
       $IMAGE_NAME >> "$RUN_LOG" 2>&1
 
     if [ $? -eq 0 ]; then
         echo -e "\n${GREEN}[SUCESSO]${NC} Container iniciado em http://localhost:3000"
-        echo -e "As alterações feitas no código serão aplicadas automaticamente."
+        echo -e "As alterações feitas em src/ e public/ serão aplicadas automaticamente no localhost."
     else
         echo -e "\n${RED}[ERRO]${NC} Falha ao iniciar o container."
         echo -e "Verifique os detalhes no log: ${BLUE}scripts/logs/run.log${NC}"

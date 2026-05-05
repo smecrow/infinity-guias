@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Smartphone, Tv, Gauge, Home, Phone, ChevronDown, Lock, CreditCard, Star, Info, UserPlus } from "lucide-react";
+import { Menu, X, Smartphone, Tv, Gauge, Home, Phone, ChevronDown, Lock, CreditCard, Star, Info, UserPlus, Sparkles } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -33,6 +33,7 @@ const Navbar = () => {
       ]
     },
     { name: "Teste de velocidade", href: "/tutoriais/speedtest", icon: <Gauge className="w-4 h-4" /> },
+    { name: "Imagina Só", href: "/tutoriais/imagina-so", icon: <Sparkles className="w-4 h-4" /> },
     { name: "Contato", href: "/contato", icon: <Phone className="w-4 h-4" /> },
   ];
 
